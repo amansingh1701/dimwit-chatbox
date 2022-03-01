@@ -5,10 +5,14 @@ export const SentMessage = styled.div`
   div.msg-row {
     display: flex;
     align-items: center;
-    margin: 40px;
+    margin: 10px;
+    @media (max-width: 1000px) {
+      margin: 20px 0;
+    }
   }
   div.msg-row2 {
     justify-content: flex-end;
+    margin: 0 6px;
   }
   div.msg-text-receive {
     color: #3874c9;
@@ -42,6 +46,7 @@ export const SentMessage = styled.div`
 export const ChatBox = styled.div`
   justify-content: space-between;
   div.send-message {
+    padding:0 10px 20px 10px;
     position: relative;
     display: flex;
     flex-direction: row;
@@ -49,14 +54,14 @@ export const ChatBox = styled.div`
     align-items: center;
     img {
       position: absolute;
-      right: 10px;
+      right: 20px;
       cursor: pointer;
     }
     input {
       display: block;
       border: 0;
       outline: none;
-      padding: 20px 40px;
+      padding: 20px 10px;
       background: #3874c9;
       color: #fff;
       width: 100%;

@@ -55,7 +55,8 @@ const Chat = () => {
   }
 
   React.useEffect(() => {
-    if (messageData) localStorage.setItem('messageData', JSON.stringify(messageData))
+    if (messageData)
+      localStorage.setItem('messageData', JSON.stringify(messageData))
     scrollToBottom()
   }, [messageData])
 
