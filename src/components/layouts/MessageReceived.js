@@ -13,7 +13,7 @@ const MessageReceived = (props) => {
           }}
         >
           <img
-            style={{ height: '150px', width: '150px' }}
+            style={{ height: '250px', width: '250px' }}
             src={props.messageContent.file}
             alt={props.messageContent.fileName}
           />

@@ -1,10 +1,10 @@
 import React from 'react'
-import send from '../../assets/send-theme2.png'
-import cross from '../../assets/close.png'
-import attachment from '../../assets/attachment-theme2.png'
+import Send from '../../assets/send-theme2.png'
+import Cross from '../../assets/close.png'
+import Attachment from '../../assets/attachment-theme2.png'
 
 const InputMessage = (props) => {
-  const [message, setMessage] = React.useState('')
+  const [message, setMessage] = React.useState("")
   const [imgData, setImgData] = React.useState(null)
 
   const handleUserInput = (e) => {
@@ -21,7 +21,6 @@ const InputMessage = (props) => {
 
   const saveImage = (e) => {
     if (e.target.files[0]) {
-      console.log('picture: ', e.target.files)
       const reader = new FileReader()
       reader.addEventListener('load', () => {
         setImgData(reader.result)
@@ -32,21 +31,21 @@ const InputMessage = (props) => {
 
   const resetInputField = (e) => {
     e.preventDefault()
-    let name = ''
-    let type = 'message'
+    let name = ""
+    let type = "message"
     if (props.messageData.length > 1) {
       if (imgData) {
         name = props.messageData[1].author
-        type = 'image'
+        type = "image"
       } else {
         name = props.messageData[1].author
-        type = 'message'
+        type = "message"
       }
     } else {
       name = message
-      type = 'name'
+      type = "name"
     }
-    if (type === 'image') {
+    if (type === "image") {
       props.handle(
         Math.random().toString(36).slice(2),
         message,
@@ -63,10 +62,10 @@ const InputMessage = (props) => {
         message,
         name,
         type,
-        '',
-        ''
+        "",
+        ""
       )
-      setMessage('')
+      setMessage("")
     }
   }
 
@@ -83,23 +82,17 @@ const InputMessage = (props) => {
         style={
           imgData
             ? {
-                height: '250px',
-                borderRadius: '50px',
-                paddingLeft: '25px',
-                paddingRight: '45px',
+                height: '220px',
               }
             : {
                 height: '60px',
-                borderRadius: '50px',
-                paddingLeft: '25px',
-                paddingRight: '45px',
               }
         }
         disabled={imgData ? true : false}
       ></textarea>
 
       {imgData && (
-        <div style={{ position: 'absolute', left: '250px', top: '50px' }}>
+        <div style={{ position: 'absolute', left: '280px', top: '10px' }}>
           <div style={{ position: 'relative' }}>
             <img
               src={imgData}
@@ -116,9 +109,9 @@ const InputMessage = (props) => {
                 width: '25px',
                 background: '#d1d4db',
                 borderRadius: '100px',
-                padding:'3px'
+                padding: '3px',
               }}
-              src={cross}
+              src={Cross}
               alt='cancel'
               onClick={deleteImage}
             />
@@ -126,7 +119,7 @@ const InputMessage = (props) => {
         </div>
       )}
       <img
-        src={send}
+        src={Send}
         alt='user'
         width='30'
         height='30'
@@ -136,7 +129,7 @@ const InputMessage = (props) => {
         <>
           <img
             style={{ right: '60px' }}
-            src={attachment}
+            src={Attachment}
             alt='user'
             width='30'
             height='30'

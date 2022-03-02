@@ -1,11 +1,21 @@
 import React from 'react'
-import ChatbotProfile from '../../assets/logo.png'
+import ChatbotProfile from '../../assets/robot-logo-white.png'
 
 const MessageSent = (props) => {
   return (
     <div className={'msg-row'}>
       <div className='msg-img'>
-        <img src={ChatbotProfile} alt='user' width='30' height='30' />
+        <img
+          style={{
+            borderRadius: '100px',
+            background: '#859FFE',
+            padding: '1px',
+          }}
+          src={ChatbotProfile}
+          alt='user'
+          width='40'
+          height='40'
+        />
       </div>
       {props.messageContent.type === 'image' ? (
         <div
@@ -17,7 +27,7 @@ const MessageSent = (props) => {
           }}
         >
           <img
-            style={{ height: '150px', width: '150px' }}
+            style={{ height: '250px', width: '250px' }}
             src={props.messageContent.file}
             alt={props.messageContent.fileName}
           />

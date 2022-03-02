@@ -92,10 +92,10 @@ const Chat = () => {
     <ChatBox>
       <Header handle={clearStorage} />
       <SentMessage ref={messagesEndRef}>
-        {messageData?.map((obj, index) => {
-          if (obj.author === 'ChatBot')
-            return <MessageSent messageContent={obj} index={index} />
-          else return <MessageReceived messageContent={obj} index={index} />
+        {messageData?.map((message, index) => {
+          if (message.author === 'ChatBot')
+            return <MessageSent messageContent={message} index={index} />
+          else return <MessageReceived messageContent={message} index={index} />
         })}
       </SentMessage>
       <InputMessage messageData={messageData} handle={handleIncomingMessage} />

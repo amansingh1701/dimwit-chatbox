@@ -14,12 +14,12 @@ export const SentMessage = styled.div`
     margin: 0 6px;
   }
   div.msg-text-receive {
-    color: #000;
+    color: #436bff;
     // color: #3874c9;
     // background: #fff;
     background: #dee6ff;
     padding: 20px 20px;
-    border-radius: 0 20px 20px 20px;
+    border-radius: 0 15px 15px 15px;
     flex-basis: 70%;
     font-weight: 300;
   }
@@ -28,7 +28,7 @@ export const SentMessage = styled.div`
     background: #436bff;
     // background: rgba(255, 255, 255, 0.1);
     padding: 20px 20px;
-    border-radius: 20px 0 20px 20px;
+    border-radius: 15px 0 15px 15px;
     flex-basis: 70%;
     font-weight: 300;
   }
@@ -64,12 +64,16 @@ export const ChatBox = styled.div`
       outline: none;
       padding: 20px 10px;
       background: #e8eaf4;
-      color: #000;
+      color: #436bff;
       width: 100%;
       font-size: 16px;
       font-weight: 300;
+      border-radius: 50px;
+      padding-left: 25px;
+      padding-right: 45px;
+      resize: none;
       ::placeholder {
-        color: #000;
+        color: #436bff;
       }
     }
   }

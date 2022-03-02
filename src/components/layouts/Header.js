@@ -1,5 +1,5 @@
 import React from 'react'
-import ChatbotProfile from '../../assets/logo.png'
+import ChatbotProfile from '../../assets/robot-logo.png'
 import Bin from '../../assets/trash-bin.png'
 
 const Header = (props) => {
@@ -21,9 +21,20 @@ const Header = (props) => {
           alignItems: 'center',
           color: '#fff',
           gap: '10px',
+          cursor: 'pointer',
         }}
       >
-        <img src={ChatbotProfile} alt='user' width='50' height='50' />
+        <img
+          style={{
+            borderRadius: '100px',
+            background: '#fff',
+            padding: '2px',
+          }}
+          src={ChatbotProfile}
+          alt='user'
+          width='50'
+          height='50'
+        />
         <h2>DimWit</h2>
       </div>
       <img
