@@ -2,8 +2,8 @@ import Chat from './pages/Chat';
 
 function App() {
   return (
-    <div className="container">
-      <Chat/>
+    <div className='container'>
+      <Chat />
     </div>
   );
 }

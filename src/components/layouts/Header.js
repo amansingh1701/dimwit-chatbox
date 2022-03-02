@@ -1,21 +1,44 @@
 import React from 'react'
 import ChatbotProfile from '../../assets/logo.png'
+import Bin from '../../assets/trash-bin.png'
 
-const Header = () => {
+const Header = (props) => {
   return (
     <div
       style={{
-        padding: '10px',
+        background: '#859FFE',
         display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
-              color: '#fff',
-              gap:"10px"
+        padding: '0 10px',
       }}
     >
-      <img src={ChatbotProfile} alt='user' width='50' height='50' />
-      <h2>DimWit</h2>
+      <div
+        style={{
+          padding: '10px 0',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          color: '#fff',
+          gap: '10px',
+        }}
+      >
+        <img src={ChatbotProfile} alt='user' width='50' height='50' />
+        <h2>DimWit</h2>
+      </div>
+      <img
+        style={{
+          height: '35px',
+          width: '35px',
+          borderRadius: '100px',
+          background: '#fff',
+          padding: '4px',
+          cursor: 'pointer',
+        }}
+        src={Bin}
+        alt='cancel'
+        onClick={props.handle}
+      />
     </div>
   )
 }

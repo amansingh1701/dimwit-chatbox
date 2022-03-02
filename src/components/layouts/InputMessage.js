@@ -1,43 +1,130 @@
 import React from 'react'
-import send from '../../assets/send.png'
+import send from '../../assets/send-theme2.png'
+import cross from '../../assets/close.png'
+import attachment from '../../assets/attachment-theme2.png'
 
 const InputMessage = (props) => {
   const [message, setMessage] = React.useState('')
+  const [imgData, setImgData] = React.useState(null)
 
   const handleUserInput = (e) => {
     setMessage(e.target.value)
   }
+  const fileInput = React.useRef(null)
 
-  const resetInputField = () => {
+  const startUpload = () => {
+    fileInput.current?.click?.()
+  }
+  const deleteImage = (e) => {
+    setImgData(null)
+  }
+
+  const saveImage = (e) => {
+    if (e.target.files[0]) {
+      console.log('picture: ', e.target.files)
+      const reader = new FileReader()
+      reader.addEventListener('load', () => {
+        setImgData(reader.result)
+      })
+      reader.readAsDataURL(e.target.files[0])
+    }
+  }
+
+  const resetInputField = (e) => {
+    e.preventDefault()
     let name = ''
-    let type='message'
+    let type = 'message'
     if (props.messageData.length > 1) {
-      name = props.messageData[1].author
-      type='message'
+      if (imgData) {
+        name = props.messageData[1].author
+        type = 'image'
+      } else {
+        name = props.messageData[1].author
+        type = 'message'
+      }
     } else {
       name = message
       type = 'name'
     }
-      if (message !== '') {
-          props.handle(
-              Math.random().toString(36).slice(2),
-              message,
-              name,
-              type
-          )
-          setMessage('')
-      }
+    if (type === 'image') {
+      props.handle(
+        Math.random().toString(36).slice(2),
+        message,
+        name,
+        type,
+        imgData,
+        `Uploaded_${Math.random().toString(36).slice(2)}`
+      )
+      setImgData(null)
+      setMessage('')
+    } else if (message !== '' && message.indexOf('\n') !== 0) {
+      props.handle(
+        Math.random().toString(36).slice(2),
+        message,
+        name,
+        type,
+        '',
+        ''
+      )
+      setMessage('')
+    }
   }
 
   return (
     <div className='send-message'>
-      <input
-        value={message} // Now input value uses local state
-        onKeyPress={(e) => e.key === 'Enter' && resetInputField()}
+      <textarea
+        value={message}
+        onKeyPress={(e) => {
+          if (e.key === 'Enter') resetInputField(e)
+        }}
         onChange={handleUserInput}
         type='text'
-        placeholder='Type your message here.....'
-      ></input>
+        placeholder={imgData ? '' : 'Message'}
+        style={
+          imgData
+            ? {
+                height: '250px',
+                borderRadius: '50px',
+                paddingLeft: '25px',
+                paddingRight: '45px',
+              }
+            : {
+                height: '60px',
+                borderRadius: '50px',
+                paddingLeft: '25px',
+                paddingRight: '45px',
+              }
+        }
+        disabled={imgData ? true : false}
+      ></textarea>
+
+      {imgData && (
+        <div style={{ position: 'absolute', left: '250px', top: '50px' }}>
+          <div style={{ position: 'relative' }}>
+            <img
+              src={imgData}
+              alt='uploadedImage'
+              width='200px'
+              height='200px'
+            />
+            <img
+              style={{
+                position: 'absolute',
+                top: '8px',
+                right: '16px',
+                height: '25px',
+                width: '25px',
+                background: '#d1d4db',
+                borderRadius: '100px',
+                padding:'3px'
+              }}
+              src={cross}
+              alt='cancel'
+              onClick={deleteImage}
+            />
+          </div>
+        </div>
+      )}
       <img
         src={send}
         alt='user'
@@ -45,6 +132,29 @@ const InputMessage = (props) => {
         height='30'
         onClick={resetInputField}
       />
+      {!imgData && message === '' && props.messageData.length > 1 && (
+        <>
+          <img
+            style={{ right: '60px' }}
+            src={attachment}
+            alt='user'
+            width='30'
+            height='30'
+            onClick={startUpload}
+            disabled={true}
+          />
+          <input
+            onChange={saveImage}
+            ref={fileInput}
+            name='image'
+            id='image'
+            style={{ display: 'none' }}
+            accept='image/*'
+            type='file'
+            alt='uploadImage'
+          ></input>
+        </>
+      )}
     </div>
   )
 }

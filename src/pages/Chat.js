@@ -5,6 +5,7 @@ import InputMessage from '../components/layouts/InputMessage'
 import MessageReceived from '../components/layouts/MessageReceived'
 import MessageSent from '../components/layouts/MessageSent'
 import Header from '../components/layouts/Header'
+import scroll from '../utils/scroll'
 
 const Chat = () => {
   const [messageData, setMessageData] = React.useState(
@@ -12,15 +13,12 @@ const Chat = () => {
   )
   const messagesEndRef = React.useRef(null)
   const scrollToBottom = () => {
-    messagesEndRef.current.scroll({
-      top: messagesEndRef.current.scrollHeight,
-      behavior: 'smooth',
-    })
+    scroll(messagesEndRef)
   }
 
   const handleAdd = (messageDetails, messageDetailsBot) => {
     if (messageData.length === 1) {
-      messageDetailsBot.content = `What's up? ${messageDetails.author}`
+      messageDetailsBot.content = `What's up, ${messageDetails.author}?`
       messageDetailsBot.type = 'message'
       setMessageData([...messageData, messageDetails, messageDetailsBot])
     } else setMessageData([...messageData, messageDetails, messageDetailsBot])
@@ -38,7 +36,7 @@ const Chat = () => {
   // }
 
   const cachedData = JSON.parse(localStorage.getItem('messageData'))
-  if (!cachedData?.length) {
+  if (!cachedData?.length && !messageData.length) {
     let initialMessage = {
       ID: 1,
       createdAt: new Date().toISOString(),
@@ -49,7 +47,6 @@ const Chat = () => {
       deletedAt: null,
       file: '',
       fileName: '',
-      externalLinks: '',
     }
     messageData.push(initialMessage)
   }
@@ -60,11 +57,12 @@ const Chat = () => {
     scrollToBottom()
   }, [messageData])
 
-  // const clearStorage = React.useCallback(() => {
-  //   localStorage.clear()
-  // }, [])
+  const clearStorage = React.useCallback(() => {
+    localStorage.clear();
+    setMessageData([])
+  }, [])
 
-  function handleIncomingMessage(ID, content, author, type) {
+  function handleIncomingMessage(ID, content, author, type, file, fileName) {
     let messageDetails = {
       ID: ID,
       createdAt: new Date().toISOString(),
@@ -73,9 +71,8 @@ const Chat = () => {
       author: author,
       type: type,
       deletedAt: null,
-      file: '',
-      fileName: '',
-      externalLinks: '',
+      file: file,
+      fileName: fileName,
     }
     let messageDetailsBot = {
       ID: Math.random().toString(36).slice(2),
@@ -85,16 +82,15 @@ const Chat = () => {
       author: 'ChatBot',
       type: type,
       deletedAt: null,
-      file: '',
-      fileName: '',
-      externalLinks: '',
+      file: file,
+      fileName: fileName,
     }
     handleAdd(messageDetails, messageDetailsBot)
   }
 
   return (
     <ChatBox>
-      <Header handle={handleIncomingMessage} />
+      <Header handle={clearStorage} />
       <SentMessage ref={messagesEndRef}>
         {messageData?.map((obj, index) => {
           if (obj.author === 'ChatBot')

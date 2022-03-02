@@ -1,10 +1,9 @@
 import styled from '@emotion/styled'
 
 export const SentMessage = styled.div`
-  overflow-y: auto;
+  overflow-y: scroll;
   div.msg-row {
     display: flex;
-    align-items: center;
     margin: 10px;
     @media (max-width: 1000px) {
       margin: 20px 0;
@@ -15,18 +14,21 @@ export const SentMessage = styled.div`
     margin: 0 6px;
   }
   div.msg-text-receive {
-    color: #3874c9;
-    background: #fff;
-    padding: 20px 40px;
-    border-radius: 30px 30px 30px 0;
+    color: #000;
+    // color: #3874c9;
+    // background: #fff;
+    background: #dee6ff;
+    padding: 20px 20px;
+    border-radius: 0 20px 20px 20px;
     flex-basis: 70%;
     font-weight: 300;
   }
   div.msg-text-send {
     color: #fff;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px 40px;
-    border-radius: 30px 30px 0 30px;
+    background: #436bff;
+    // background: rgba(255, 255, 255, 0.1);
+    padding: 20px 20px;
+    border-radius: 20px 0 20px 20px;
     flex-basis: 70%;
     font-weight: 300;
   }
@@ -37,7 +39,6 @@ export const SentMessage = styled.div`
   }
 
   div.msg-img {
-    height: 0px;
     border-radius: 50%;
     margin: 0 6px;
   }
@@ -46,7 +47,7 @@ export const SentMessage = styled.div`
 export const ChatBox = styled.div`
   justify-content: space-between;
   div.send-message {
-    padding:0 10px 20px 10px;
+    padding: 0 10px 20px 10px;
     position: relative;
     display: flex;
     flex-direction: row;
@@ -57,22 +58,23 @@ export const ChatBox = styled.div`
       right: 20px;
       cursor: pointer;
     }
-    input {
+    textarea {
       display: block;
       border: 0;
       outline: none;
       padding: 20px 10px;
-      background: #3874c9;
-      color: #fff;
+      background: #e8eaf4;
+      color: #000;
       width: 100%;
       font-size: 16px;
       font-weight: 300;
       ::placeholder {
-        color: #fff;
+        color: #000;
       }
     }
   }
-  background: #1d61c2;
+  background: #f7f6f4;
+  // background: #1d61c2;
   width: 60%;
   height: 80%;
   min-width: 250px;
